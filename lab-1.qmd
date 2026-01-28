@@ -34,7 +34,7 @@ ggplot(midwest, aes(x = popdensity)) +
       title =  "Midwest Population Density, Frequency by County",
     subtitle = "Binwidth = 1000",
     x = "Population Density",
-    y = "Count") 
+    y = "Count")
 
 ggplot(midwest, aes(x = popdensity)) + 
   geom_histogram(binwidth = 10000) +
@@ -57,6 +57,24 @@ ggplot(midwest, aes(x = popdensity)) +
 A binwidth of 1000 is better for interpretation, it is easier to differentiate each bin and identify trends. Outliers are also visible enough with this binwidth.
 
 ### Question 2
+
+```{r}
+
+ggplot(data = midwest, aes(x = county, y = popdensity, scale = 1/100000)) + 
+  geom_boxplot() +
+  labs(
+    title = "Population Density Across Midwestern Counties",
+    x = "County",
+    y = "Population Density"
+  ) +
+  scale_x_discrete(labels = NULL)
+
+
+  
+
+```
+
+Most county's have a population density lower than 25,000. Outlier counties are ones that exceed 25,000 with Cook county being the most dense at 88,000.
 
 ### Question 3
 
