@@ -10,6 +10,52 @@ editor: visual
 
 ### Question 1
 
+```{r}
+#| label: load-packages
+
+library(tidyverse)
+
+```
+
+```{r}
+#| label: Midwest Q1
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 100) +
+  labs( 
+   title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 100",
+    x = "Population Density",
+    y = "Count")
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 1000) + 
+  labs( 
+      title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 1000",
+    x = "Population Density",
+    y = "Count") 
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 10000) +
+  labs(
+    title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 10000",
+    x = "Population Density",
+    y = "Count")
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 100000) +
+  labs( 
+   title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 100000",
+    x = "Population Density",
+    y = "Count")
+
+```
+
+A binwidth of 1000 is better for interpretation, it is easier to differentiate each bin and identify trends. Outliers are also visible enough with this binwidth.
+
 ### Question 2
 
 ### Question 3
