@@ -59,6 +59,7 @@ A binwidth of 1000 is better for interpretation, it is easier to differentiate e
 ### Question 2
 
 ```{r}
+#| label: Midwest Q2
 
 ggplot(data = midwest, aes(x = county, y = popdensity, scale = 1/100000)) + 
   geom_boxplot() +
@@ -77,6 +78,25 @@ ggplot(data = midwest, aes(x = county, y = popdensity, scale = 1/100000)) +
 Most county's have a population density lower than 25,000. Outlier counties are ones that exceed 25,000 with Cook county being the most dense at 88,000.
 
 ### Question 3
+
+```{r}
+#| label: Midwest Q3
+
+ggplot(data = midwest, 
+       aes(x = percollege, y = percbelowpoverty, color = state, shape = state)) +
+      geom_point() +
+      labs(
+        title = "How College Education Impacts Poverty",
+        x = "College Education(%)",
+        y = "Below Poverty Line(%)",
+      )
+
+
+```
+
+The graph appears to show that more educated county's have less poverty compared to county's with less college education.\
+Jackson county, Illinois is one outlier. With 36% of its population being college educated while 26% remain below the poverty line. \
+State-by-state, there is little variation. Wisconsin county's overall seems to be more college-educated, while Indianan county's are the later.
 
 ### Question 4
 
