@@ -95,10 +95,29 @@ ggplot(data = midwest,
 ```
 
 The graph appears to show that more educated county's have less poverty compared to county's with less college education.\
-Jackson county, Illinois is one outlier. With 36% of its population being college educated while 26% remain below the poverty line. \
+Jackson county, Illinois is one outlier. With 36% of its population being college educated while 26% remain below the poverty line.\
 State-by-state, there is little variation. Wisconsin county's overall seems to be more college-educated, while Indianan county's are the later.
 
 ### Question 4
+
+```{r}
+#| label: Midwest Q4
+
+ggplot(data = midwest, 
+       aes(x = percollege, y = percbelowpoverty, color = state, shape = state)) +
+      geom_point() +
+      geom_smooth() +
+      facet_wrap(~state) +
+      labs(
+        title = "How College Education Impacts Poverty Across Midwest Counties",
+        x = "College Education(%)",
+        y = "Below Poverty Line(%)",
+      )
+
+
+```
+
+I prefer the latter plot, while it is easier to determine state-specific trends in this plot, it is hard to compare state-to-state effects. Furthermore, regional trends are also easier to identify. Color and point shape definitely helps the first plot.
 
 ### Question 5
 
