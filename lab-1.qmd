@@ -121,6 +121,21 @@ I prefer the latter plot, while it is easier to determine state-specific trends 
 
 ### Question 5
 
+```{r}
+#| label: Midwest Q5
+
+ggplot(data = midwest, aes(x = state, y = area)) + 
+  geom_boxplot() +
+  labs(
+    title = "County Area Distributiion of Midwestern States",
+    x = "State",
+    y = "Area"
+  )
+
+```
+
+County area size averages 0.03 square miles, with Wisconsin at the higher end. Variability is different across all states. Wisconsin, Illinois, and Michigan are have larger variability compared to Indiana and Ohio. Marquette county, Michigan is the largest county by area in the Midwest, spanning 0.110 square miles.
+
 ### Question 6
 
 ### Question 7
