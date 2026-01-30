@@ -162,7 +162,26 @@ Overall most Midwestern counties do not connect to their state metropolitan area
 
 ### Question 7
 
-## Part 2
+```{r}
+#| label: Midwest Q7
+
+ggplot(data = midwest, aes(x = percollege, y = percbelowpoverty, color = percwhite, alpha = 0.5)) +  
+  geom_point() + 
+  scale_color_gradient(low = "black", high = "dodgerblue2") +
+  facet_wrap(~state) + 
+  labs(
+    title = "How College Edcucation Impacts State Poverty",
+    x = "College Education(%)",
+    y = "Below Poverty Line(%)",
+    color = "% White",
+    alpha = "",
+  )
+
+```
+
+Ozaukee county is the clear outlier county in Wisconsin. The county is predominantly white at 98%.
+
+##  Part 2
 
 **Enough about the Midwest!**
 
