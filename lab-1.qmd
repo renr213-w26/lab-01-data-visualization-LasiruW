@@ -185,6 +185,47 @@ Ozaukee county is the clear outlier county in Wisconsin. The county is predomina
 
 **Enough about the Midwest!**
 
+```{r}
+#| label: PT2 SETUP 
+
+
+nc.county <- read.csv("data/nc-county.csv")
+```
+
 ### Question 8
 
+I believe that population density decreases while land area increases.
+
+```{r}
+#| label: NC Q8 
+
+ggplot(data = nc.county, aes(x = land_area_mi2, y = density)) +
+  geom_point() +
+  labs(
+    title = "How County Land Area Impacts Population Density",
+    subtitle = "North Carolina, US", 
+    x = "Land Area(mi^2)",
+    y = "Population Density(people per mi^2)"
+  )
+
+```
+
+I was incorrect, land area does not seem to have an impact on population density, maybe this is due to more rural communities across counties?
+
 ### Question 9
+
+```{r}
+#| label: NC Q9 
+
+ggplot(data = nc.county, aes(x = land_area_m2, y = density)) +
+  geom_point() +
+  labs(
+    title = "How County Land Area Impacts Population Density",
+    subtitle = "North Carolina, US", 
+    x = "Land Area(million m^2)",
+    y = "Population Density(people per mi^2)"
+  ) +
+  scale_x_continuous(label = label_number(scale = 1/1000000))
+```
+
+This does not change anything from question 8, because the units of population density have not been changed to meters squared.
