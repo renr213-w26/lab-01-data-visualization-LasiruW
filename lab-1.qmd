@@ -10,22 +10,222 @@ editor: visual
 
 ### Question 1
 
+```{r}
+#| label: load-packages
+
+library(tidyverse)
+library(scales)
+
+```
+
+```{r}
+#| label: Midwest Q1
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 100) +
+  labs( 
+   title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 100",
+    x = "Population Density",
+    y = "Count")
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 1000) + 
+  labs( 
+      title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 1000",
+    x = "Population Density",
+    y = "Count")
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 10000) +
+  labs(
+    title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 10000",
+    x = "Population Density",
+    y = "Count")
+
+ggplot(midwest, aes(x = popdensity)) + 
+  geom_histogram(binwidth = 100000) +
+  labs( 
+   title =  "Midwest Population Density, Frequency by County",
+    subtitle = "Binwidth = 100000",
+    x = "Population Density",
+    y = "Count")
+
+```
+
+A binwidth of 1000 is better for interpretation, it is easier to differentiate each bin and identify trends. Outliers are also visible enough with this binwidth.
+
 ### Question 2
+
+```{r}
+#| label: Midwest Q2
+
+ggplot(data = midwest, aes(x = county, y = popdensity, scale = 1/100000)) + 
+  geom_boxplot() +
+  labs(
+    title = "Population Density Across Midwestern Counties",
+    x = "County",
+    y = "Population Density"
+  ) +
+  scale_x_discrete(labels = NULL)
+
+
+  
+
+```
+
+Most county's have a population density lower than 25,000. Outlier counties are ones that exceed 25,000 with Cook county being the most dense at 88,000.
 
 ### Question 3
 
+```{r}
+#| label: Midwest Q3
+
+ggplot(data = midwest, 
+       aes(x = percollege, y = percbelowpoverty, color = state, shape = state)) +
+      geom_point() +
+      labs(
+        title = "How College Education Impacts Poverty",
+        x = "College Education(%)",
+        y = "Below Poverty Line(%)",
+      )
+
+
+```
+
+The graph appears to show that more educated county's have less poverty compared to county's with less college education.\
+Jackson county, Illinois is one outlier. With 36% of its population being college educated while 26% remain below the poverty line.\
+State-by-state, there is little variation. Wisconsin county's overall seems to be more college-educated, while Indianan county's are the later.
+
 ### Question 4
+
+```{r}
+#| label: Midwest Q4
+
+ggplot(data = midwest, 
+       aes(x = percollege, y = percbelowpoverty, color = state, shape = state)) +
+      geom_point() +
+      geom_smooth() +
+      facet_wrap(~state) +
+      labs(
+        title = "How College Education Impacts Poverty Across Midwest Counties",
+        x = "College Education(%)",
+        y = "Below Poverty Line(%)",
+      )
+
+
+```
+
+I prefer the latter plot, while it is easier to determine state-specific trends in this plot, it is hard to compare state-to-state effects. Furthermore, regional trends are also easier to identify. Color and point shape definitely helps the first plot.
 
 ### Question 5
 
+```{r}
+#| label: Midwest Q5
+
+ggplot(data = midwest, aes(x = state, y = area)) + 
+  geom_boxplot() +
+  labs(
+    title = "County Area Distributiion of Midwestern States",
+    x = "State",
+    y = "Area"
+  )
+
+```
+
+County area size averages 0.03 square miles, with Wisconsin at the higher end. Variability is different across all states. Wisconsin, Illinois, and Michigan are have larger variability compared to Indiana and Ohio. Marquette county, Michigan is the largest county by area in the Midwest, spanning 0.110 square miles.
+
 ### Question 6
+
+```{r}
+#| label: Midwest Q6
+
+
+midwest <- midwest |> 
+  mutate(metro = if_else(inmetro == 1, "Yes", "No"))
+
+ggplot(data = midwest, aes(fill = state, x = metro)) + 
+  geom_bar() + 
+  labs(
+    title = "Proportion of Counties Connected to Metropolitan Area",
+    x = "Metropolitan Access",
+    y = "No. of Counties",
+  ) +
+  scale_y_continuous(label = label_percent(scale = 1/10))
+
+
+```
+
+Overall most Midwestern counties do not connect to their state metropolitan area. Connection differences at the state level vary, from as high as 11% for Illinois to as a low as 3% for Wisconsin.
 
 ### Question 7
 
-## Part 2
+```{r}
+#| label: Midwest Q7
+
+ggplot(data = midwest, aes(x = percollege, y = percbelowpoverty, color = percwhite, alpha = 0.5)) +  
+  geom_point() + 
+  scale_color_gradient(low = "black", high = "dodgerblue2") +
+  facet_wrap(~state) + 
+  labs(
+    title = "How College Edcucation Impacts State Poverty",
+    x = "College Education(%)",
+    y = "Below Poverty Line(%)",
+    color = "% White",
+    alpha = "",
+  )
+
+```
+
+Ozaukee county is the clear outlier county in Wisconsin. The county is predominantly white at 98%.
+
+##  Part 2
 
 **Enough about the Midwest!**
 
+```{r}
+#| label: PT2 SETUP 
+
+
+nc.county <- read.csv("data/nc-county.csv")
+```
+
 ### Question 8
 
+I believe that population density decreases while land area increases.
+
+```{r}
+#| label: NC Q8 
+
+ggplot(data = nc.county, aes(x = land_area_mi2, y = density)) +
+  geom_point() +
+  labs(
+    title = "How County Land Area Impacts Population Density",
+    subtitle = "North Carolina, US", 
+    x = "Land Area(mi^2)",
+    y = "Population Density(people per mi^2)"
+  )
+
+```
+
+I was incorrect, land area does not seem to have an impact on population density, maybe this is due to more rural communities across counties?
+
 ### Question 9
+
+```{r}
+#| label: NC Q9 
+
+ggplot(data = nc.county, aes(x = land_area_m2, y = density)) +
+  geom_point() +
+  labs(
+    title = "How County Land Area Impacts Population Density",
+    subtitle = "North Carolina, US", 
+    x = "Land Area(million m^2)",
+    y = "Population Density(people per mi^2)"
+  ) +
+  scale_x_continuous(label = label_number(scale = 1/1000000))
+```
+
+This does not change anything from question 8, because the units of population density have not been changed to meters squared.
