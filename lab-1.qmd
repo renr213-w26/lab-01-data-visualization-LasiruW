@@ -14,6 +14,7 @@ editor: visual
 #| label: load-packages
 
 library(tidyverse)
+library(scales)
 
 ```
 
@@ -137,6 +138,27 @@ ggplot(data = midwest, aes(x = state, y = area)) +
 County area size averages 0.03 square miles, with Wisconsin at the higher end. Variability is different across all states. Wisconsin, Illinois, and Michigan are have larger variability compared to Indiana and Ohio. Marquette county, Michigan is the largest county by area in the Midwest, spanning 0.110 square miles.
 
 ### Question 6
+
+```{r}
+#| label: Midwest Q6
+
+
+midwest <- midwest |> 
+  mutate(metro = if_else(inmetro == 1, "Yes", "No"))
+
+ggplot(data = midwest, aes(fill = state, x = metro)) + 
+  geom_bar() + 
+  labs(
+    title = "Proportion of Counties Connected to Metropolitan Area",
+    x = "Metropolitan Access",
+    y = "No. of Counties",
+  ) +
+  scale_y_continuous(label = label_percent(scale = 1/10))
+
+
+```
+
+Overall most Midwestern counties do not connect to their state metropolitan area. Connection differences at the state level vary, from as high as 11% for Illinois to as a low as 3% for Wisconsin.
 
 ### Question 7
 
